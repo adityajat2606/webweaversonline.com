@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, type FormEvent } from 'react'
 import Link from 'next/link'
@@ -9,33 +9,6 @@ import { SITE_CONFIG } from '@/lib/site-config'
 
 export const CONTACT_PAGE_OVERRIDE_ENABLED = true
 
-const contactChannels = [
-  {
-    icon: Phone,
-    title: 'Call Us',
-    primary: '+1 (555) 123-4567',
-    secondary: 'Mon–Fri, 9am–6pm EST',
-  },
-  {
-    icon: Mail,
-    title: 'Email Us',
-    primary: `hello@${SITE_CONFIG.domain}`,
-    secondary: 'We reply within 24 hours',
-  },
-  {
-    icon: MapPin,
-    title: 'Visit Us',
-    primary: '123 Listing Avenue',
-    secondary: 'Premium District, Suite 400',
-  },
-  {
-    icon: MessageCircle,
-    title: 'Live Chat',
-    primary: 'Available 24/7',
-    secondary: 'Real humans, real answers',
-  },
-]
-
 const reasons = [
   'List your business on our curated platform',
   'Partner with us for featured placements',
@@ -45,6 +18,36 @@ const reasons = [
 
 export function ContactPageOverride() {
   const [submitted, setSubmitted] = useState(false)
+  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || `hello@${SITE_CONFIG.domain}`
+
+  const contactChannels = [
+    {
+      icon: Phone,
+      title: 'Call Us',
+      primary: '+1 (555) 123-4567',
+      secondary: 'Mon-Fri, 9am-6pm EST',
+    },
+    {
+      icon: Mail,
+      title: 'Email Us',
+      primary: contactEmail,
+      secondary: 'We reply within 24 hours',
+      href: `mailto:${contactEmail}`,
+      ctaLabel: 'Email now',
+    },
+    {
+      icon: MapPin,
+      title: 'Visit Us',
+      primary: '123 Listing Avenue',
+      secondary: 'Premium District, Suite 400',
+    },
+    {
+      icon: MessageCircle,
+      title: 'Live Chat',
+      primary: 'Available 24/7',
+      secondary: 'Real humans, real answers',
+    },
+  ]
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault()
@@ -69,7 +72,7 @@ export function ContactPageOverride() {
               We'd Love to<br />Hear From You
             </h1>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-[#6e5547]">
-              Whether you're looking to list your business, partner with us, or simply discover the right service — our team is here to make your journey smooth and personal.
+              Whether you're looking to list your business, partner with us, or simply discover the right service - our team is here to make your journey smooth and personal.
             </p>
           </div>
         </section>
@@ -87,6 +90,14 @@ export function ContactPageOverride() {
                 <h3 className="mt-5 font-serif text-lg font-semibold text-[#3d2a1c]">{c.title}</h3>
                 <p className="mt-2 text-sm font-medium text-[#8b6240]">{c.primary}</p>
                 <p className="mt-1 text-xs text-[#a08161]">{c.secondary}</p>
+                {c.href ? (
+                  <a
+                    href={c.href}
+                    className="mt-4 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#b88a5e] to-[#8b6240] px-4 py-2 text-xs font-semibold text-white transition-transform hover:scale-[1.02]"
+                  >
+                    {c.ctaLabel}
+                  </a>
+                ) : null}
               </div>
             ))}
           </div>
@@ -100,7 +111,7 @@ export function ContactPageOverride() {
                 Every great connection starts with a simple message
               </h2>
               <p className="mt-4 text-sm leading-7 text-white/85">
-                Tell us what you're looking for and we'll point you in the right direction — quickly, thoughtfully, and without the runaround.
+                Tell us what you're looking for and we'll point you in the right direction - quickly, thoughtfully, and without the runaround.
               </p>
               <div className="mt-8 space-y-3">
                 {reasons.map((r) => (

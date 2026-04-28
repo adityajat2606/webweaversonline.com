@@ -6,6 +6,12 @@ import { usePathname, useRouter } from 'next/navigation'
 import { Menu, X, ChevronDown, LogOut, User as UserIcon } from 'lucide-react'
 import { useAuth } from '@/lib/auth-context'
 import { SITE_CONFIG } from '@/lib/site-config'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 
 export const NAVBAR_OVERRIDE_ENABLED = true
 
@@ -106,20 +112,32 @@ export function NavbarOverride() {
         <div className="flex items-center gap-3">
           {isAuthenticated ? (
             <div className="hidden items-center gap-2 md:flex">
-              <Link
-                href="/dashboard"
-                className="flex items-center gap-2 rounded-full bg-[#fbf3e8] px-3 py-2 text-sm font-medium text-[#8b6240] hover:bg-[#f5e7d0]"
-              >
+              <span className="flex items-center gap-2 rounded-full bg-[#fbf3e8] px-3 py-2 text-sm font-medium text-[#8b6240]">
                 <UserIcon className="h-4 w-4" />
                 {user?.name?.split(' ')[0] || 'Account'}
-              </Link>
-              <button
-                onClick={() => { logout(); router.push('/') }}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e6d5c2] text-[#8b6240] hover:bg-[#fbf3e8]"
-                aria-label="Sign out"
-              >
-                <LogOut className="h-4 w-4" />
-              </button>
+              </span>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e6d5c2] text-[#8b6240] hover:bg-[#fbf3e8]"
+                    aria-label="Profile menu"
+                  >
+                    <UserIcon className="h-4 w-4" />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-40 border-[#e6d5c2] bg-white">
+                  <DropdownMenuItem
+                    onClick={() => {
+                      logout()
+                      router.push('/')
+                    }}
+                    className="text-[#8b6240] focus:bg-[#fbf3e8] focus:text-[#8b6240]"
+                  >
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Sign out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           ) : (
             <div className="hidden items-center gap-2 md:flex">

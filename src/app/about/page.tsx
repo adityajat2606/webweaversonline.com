@@ -41,13 +41,6 @@ const milestones = [
   { year: '2025', title: 'Today', text: '12,000+ clients served and growing — one thoughtful connection at a time.' },
 ]
 
-const team = [
-  { name: 'Elena Marchetti', role: 'Founder & CEO', img: 'https://i.pravatar.cc/240?img=45' },
-  { name: 'James Holloway', role: 'Head of Curation', img: 'https://i.pravatar.cc/240?img=12' },
-  { name: 'Priya Raman', role: 'Design Director', img: 'https://i.pravatar.cc/240?img=47' },
-  { name: 'Marcus Chen', role: 'Client Experience', img: 'https://i.pravatar.cc/240?img=33' },
-]
-
 export default function AboutPage() {
   return (
     <PageShell
@@ -172,35 +165,6 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="mt-20">
-        <div className="text-center">
-          <p className="text-xs font-medium uppercase tracking-[0.24em] text-[#8b6240]">The Humans</p>
-          <h2 className="mt-3 font-serif text-4xl font-semibold text-[#3d2a1c] sm:text-5xl">Meet the Team</h2>
-          <p className="mx-auto mt-4 max-w-xl text-sm text-[#6e5547]">
-            Small, deliberate, and deeply invested in the work.
-          </p>
-        </div>
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {team.map((m) => (
-            <div key={m.name} className="group text-center">
-              <div className="relative mx-auto h-48 w-48 overflow-hidden rounded-full border-4 border-[#fbf3e8] shadow-md">
-                <img src={m.img} alt={m.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
-              </div>
-              <h3 className="mt-5 font-serif text-lg font-semibold text-[#3d2a1c]">{m.name}</h3>
-              <p className="mt-1 text-sm text-[#8b6240]">{m.role}</p>
-            </div>
-          ))}
-        </div>
-        <div className="mt-10 text-center">
-          <Link
-            href="/careers"
-            className="inline-flex items-center gap-2 rounded-full border border-[#8b6240] px-6 py-3 text-sm font-medium text-[#8b6240] hover:bg-white"
-          >
-            Join our team
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </div>
     </PageShell>
   )
 }

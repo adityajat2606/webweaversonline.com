@@ -33,7 +33,7 @@ function LoginInner() {
     }
     try {
       await login(email.trim(), password)
-      const redirect = searchParams?.get('redirect') || '/dashboard'
+      const redirect = searchParams?.get('redirect') || '/'
       router.push(redirect)
     } catch (err) {
       setError('Unable to sign in. Please try again.')
